@@ -18,7 +18,7 @@ struct ContentView: View {
     
     var weatherManager = WeatherManager()//this property stores an instance of WeatherManager which is responsible for fetching weather data
     @State var weather: ResponseBody?// the optional property that will hold the weather data when fetched successfully
-    
+    @State private var weatherType: String? = "sunny" // Set initial weather type (optional)
     //layout setting
     var body: some View {
         VStack {
@@ -27,7 +27,7 @@ struct ContentView: View {
                 if let weather = weather {//another optional binding, checks if weather data is available
                     WeatherView(weather: weather)
                 } else {
-                    LoadingView()//show a loading animation while weather data is being fetched
+                    LoadingView(weatherType: weatherType)//show a loading animation while weather data is being fetched
                         .task {
                             do {
                                 weather = try await weatherManager.getCurrentWeather(latitude: location.latitude, longitude: location.longitude)//fetch weather data asynchronously using tthe latitude and longitude
@@ -40,7 +40,7 @@ struct ContentView: View {
             } else {
                 //if no location is avaiable yet, this is for debug,because sometimes xcode may disable or not load the location
                 if locationManager.isLoading {
-                    LoadingView() //show loading animation while waiting for the location
+                    LoadingView(weatherType: weatherType) //show loading animation while waiting for the location
                 } else {
                     WelcomeView()
                         .environmentObject(locationManager)
