@@ -49,5 +49,5 @@ struct LoadingView: View {
 }
 
 #Preview {
-   LoadingView(weatherType: "sunny")
+    LoadingView(weatherType: "sunny")
 }
