@@ -7,6 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		883BCC042BE665B50057D831 /* partly_cloudy.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF12BE665B50057D831 /* partly_cloudy.scn */; };
+		883BCC052BE665B50057D831 /* snowfall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF22BE665B50057D831 /* snowfall.scn */; };
+		883BCC062BE665B50057D831 /* night_snowfall.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF32BE665B50057D831 /* night_snowfall.scn */; };
+		883BCC072BE665B50057D831 /* snowflake.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF42BE665B50057D831 /* snowflake.scn */; };
+		883BCC082BE665B50057D831 /* thunderstorm.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF52BE665B50057D831 /* thunderstorm.scn */; };
+		883BCC092BE665B50057D831 /* light_thunderstorm.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF62BE665B50057D831 /* light_thunderstorm.scn */; };
+		883BCC0A2BE665B50057D831 /* big_thunderstorm_with_hail.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF72BE665B50057D831 /* big_thunderstorm_with_hail.scn */; };
+		883BCC0B2BE665B50057D831 /* cloudy_fog.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF82BE665B50057D831 /* cloudy_fog.scn */; };
+		883BCC0C2BE665B50057D831 /* cloudy_night.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBF92BE665B50057D831 /* cloudy_night.scn */; };
+		883BCC0D2BE665B50057D831 /* heavy_snow.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBFA2BE665B50057D831 /* heavy_snow.scn */; };
+		883BCC0E2BE665B50057D831 /* light_rain.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBFB2BE665B50057D831 /* light_rain.scn */; };
+		883BCC0F2BE665B50057D831 /* thunder_cloud.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBFC2BE665B50057D831 /* thunder_cloud.scn */; };
+		883BCC102BE665B50057D831 /* sunny.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBFD2BE665B50057D831 /* sunny.scn */; };
+		883BCC112BE665B50057D831 /* cloudy.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBFE2BE665B50057D831 /* cloudy.scn */; };
+		883BCC122BE665B50057D831 /* solo_snow.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCBFF2BE665B50057D831 /* solo_snow.scn */; };
+		883BCC132BE665B50057D831 /* clear_moon.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCC002BE665B50057D831 /* clear_moon.scn */; };
+		883BCC142BE665B50057D831 /* angry_rain.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCC012BE665B50057D831 /* angry_rain.scn */; };
+		883BCC152BE665B50057D831 /* thunderstorm_with_hail.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCC022BE665B50057D831 /* thunderstorm_with_hail.scn */; };
+		883BCC162BE665B50057D831 /* heavy_rain.scn in Resources */ = {isa = PBXBuildFile; fileRef = 883BCC032BE665B50057D831 /* heavy_rain.scn */; };
+		883BCC182BE665C60057D831 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883BCC172BE665C60057D831 /* City.swift */; };
 		887FE5002BDFDBA80086FB6E /* WeatherlyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE4FF2BDFDBA80086FB6E /* WeatherlyApp.swift */; };
 		887FE5022BDFDBA80086FB6E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887FE5012BDFDBA80086FB6E /* ContentView.swift */; };
 		887FE5042BDFDBAA0086FB6E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887FE5032BDFDBAA0086FB6E /* Assets.xcassets */; };
@@ -44,6 +64,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		883BCBF12BE665B50057D831 /* partly_cloudy.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = partly_cloudy.scn; sourceTree = "<group>"; };
+		883BCBF22BE665B50057D831 /* snowfall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = snowfall.scn; sourceTree = "<group>"; };
+		883BCBF32BE665B50057D831 /* night_snowfall.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = night_snowfall.scn; sourceTree = "<group>"; };
+		883BCBF42BE665B50057D831 /* snowflake.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = snowflake.scn; sourceTree = "<group>"; };
+		883BCBF52BE665B50057D831 /* thunderstorm.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = thunderstorm.scn; sourceTree = "<group>"; };
+		883BCBF62BE665B50057D831 /* light_thunderstorm.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = light_thunderstorm.scn; sourceTree = "<group>"; };
+		883BCBF72BE665B50057D831 /* big_thunderstorm_with_hail.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = big_thunderstorm_with_hail.scn; sourceTree = "<group>"; };
+		883BCBF82BE665B50057D831 /* cloudy_fog.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cloudy_fog.scn; sourceTree = "<group>"; };
+		883BCBF92BE665B50057D831 /* cloudy_night.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cloudy_night.scn; sourceTree = "<group>"; };
+		883BCBFA2BE665B50057D831 /* heavy_snow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = heavy_snow.scn; sourceTree = "<group>"; };
+		883BCBFB2BE665B50057D831 /* light_rain.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = light_rain.scn; sourceTree = "<group>"; };
+		883BCBFC2BE665B50057D831 /* thunder_cloud.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = thunder_cloud.scn; sourceTree = "<group>"; };
+		883BCBFD2BE665B50057D831 /* sunny.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = sunny.scn; sourceTree = "<group>"; };
+		883BCBFE2BE665B50057D831 /* cloudy.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = cloudy.scn; sourceTree = "<group>"; };
+		883BCBFF2BE665B50057D831 /* solo_snow.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = solo_snow.scn; sourceTree = "<group>"; };
+		883BCC002BE665B50057D831 /* clear_moon.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = clear_moon.scn; sourceTree = "<group>"; };
+		883BCC012BE665B50057D831 /* angry_rain.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = angry_rain.scn; sourceTree = "<group>"; };
+		883BCC022BE665B50057D831 /* thunderstorm_with_hail.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = thunderstorm_with_hail.scn; sourceTree = "<group>"; };
+		883BCC032BE665B50057D831 /* heavy_rain.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = heavy_rain.scn; sourceTree = "<group>"; };
+		883BCC172BE665C60057D831 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		887FE4FC2BDFDBA80086FB6E /* Weatherly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weatherly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887FE4FF2BDFDBA80086FB6E /* WeatherlyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherlyApp.swift; sourceTree = "<group>"; };
 		887FE5012BDFDBA80086FB6E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -91,6 +131,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		883BCBF02BE665B50057D831 /* 3D_Objects */ = {
+			isa = PBXGroup;
+			children = (
+				883BCBF12BE665B50057D831 /* partly_cloudy.scn */,
+				883BCBF22BE665B50057D831 /* snowfall.scn */,
+				883BCBF32BE665B50057D831 /* night_snowfall.scn */,
+				883BCBF42BE665B50057D831 /* snowflake.scn */,
+				883BCBF52BE665B50057D831 /* thunderstorm.scn */,
+				883BCBF62BE665B50057D831 /* light_thunderstorm.scn */,
+				883BCBF72BE665B50057D831 /* big_thunderstorm_with_hail.scn */,
+				883BCBF82BE665B50057D831 /* cloudy_fog.scn */,
+				883BCBF92BE665B50057D831 /* cloudy_night.scn */,
+				883BCBFA2BE665B50057D831 /* heavy_snow.scn */,
+				883BCBFB2BE665B50057D831 /* light_rain.scn */,
+				883BCBFC2BE665B50057D831 /* thunder_cloud.scn */,
+				883BCBFD2BE665B50057D831 /* sunny.scn */,
+				883BCBFE2BE665B50057D831 /* cloudy.scn */,
+				883BCBFF2BE665B50057D831 /* solo_snow.scn */,
+				883BCC002BE665B50057D831 /* clear_moon.scn */,
+				883BCC012BE665B50057D831 /* angry_rain.scn */,
+				883BCC022BE665B50057D831 /* thunderstorm_with_hail.scn */,
+				883BCC032BE665B50057D831 /* heavy_rain.scn */,
+			);
+			name = 3D_Objects;
+			path = "../../../../../../Downloads/WeatherAppSwiftUI-main/weatherfinal_proj/weatherfinal_proj/3D_Objects";
+			sourceTree = "<group>";
+		};
 		887FE4F32BDFDBA80086FB6E = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +181,7 @@
 		887FE4FE2BDFDBA80086FB6E /* Weatherly */ = {
 			isa = PBXGroup;
 			children = (
+				883BCBF02BE665B50057D831 /* 3D_Objects */,
 				887FE52D2BDFDE060086FB6E /* Utils */,
 				887FE52C2BDFDDFA0086FB6E /* Model */,
 				887FE52B2BDFDDF00086FB6E /* Managers */,
@@ -193,6 +261,7 @@
 			children = (
 				887FE5362BDFDE6D0086FB6E /* Extensions.swift */,
 				887FE5422BDFE03B0086FB6E /* Responses.swift */,
+				883BCC172BE665C60057D831 /* City.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -302,8 +371,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				887FE5072BDFDBAA0086FB6E /* Preview Assets.xcassets in Resources */,
+				883BCC092BE665B50057D831 /* light_thunderstorm.scn in Resources */,
+				883BCC112BE665B50057D831 /* cloudy.scn in Resources */,
+				883BCC0F2BE665B50057D831 /* thunder_cloud.scn in Resources */,
+				883BCC082BE665B50057D831 /* thunderstorm.scn in Resources */,
+				883BCC132BE665B50057D831 /* clear_moon.scn in Resources */,
+				883BCC0C2BE665B50057D831 /* cloudy_night.scn in Resources */,
+				883BCC052BE665B50057D831 /* snowfall.scn in Resources */,
+				883BCC162BE665B50057D831 /* heavy_rain.scn in Resources */,
 				887FE5042BDFDBAA0086FB6E /* Assets.xcassets in Resources */,
+				883BCC152BE665B50057D831 /* thunderstorm_with_hail.scn in Resources */,
+				883BCC042BE665B50057D831 /* partly_cloudy.scn in Resources */,
+				883BCC102BE665B50057D831 /* sunny.scn in Resources */,
+				883BCC122BE665B50057D831 /* solo_snow.scn in Resources */,
+				883BCC0A2BE665B50057D831 /* big_thunderstorm_with_hail.scn in Resources */,
+				883BCC0B2BE665B50057D831 /* cloudy_fog.scn in Resources */,
+				883BCC142BE665B50057D831 /* angry_rain.scn in Resources */,
+				883BCC0D2BE665B50057D831 /* heavy_snow.scn in Resources */,
 				887FE5392BDFDEED0086FB6E /* weather.json in Resources */,
+				883BCC072BE665B50057D831 /* snowflake.scn in Resources */,
+				883BCC062BE665B50057D831 /* night_snowfall.scn in Resources */,
+				883BCC0E2BE665B50057D831 /* light_rain.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +418,7 @@
 			files = (
 				887FE5022BDFDBA80086FB6E /* ContentView.swift in Sources */,
 				887FE5002BDFDBA80086FB6E /* WeatherlyApp.swift in Sources */,
+				883BCC182BE665C60057D831 /* City.swift in Sources */,
 				887FE5332BDFDE460086FB6E /* ModelData.swift in Sources */,
 				887FE5352BDFDE5E0086FB6E /* WeatherRow.swift in Sources */,
 				887FE53F2BDFDF2D0086FB6E /* WelcomeView.swift in Sources */,
