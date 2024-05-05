@@ -6,10 +6,6 @@
 //
 
 import SwiftUI
-
-import SwiftUI
-import CoreLocation
-
 struct ContentView: View {
     @State private var cities = [City]()
     @State private var searchText = ""
@@ -26,7 +22,7 @@ struct ContentView: View {
     private var tabName: String {
         switch selectedTab {
         case .currently:
-            return "Weatherly"
+            return "Currently"
         case .today:
             return "Today"
         case .weekly:
@@ -84,10 +80,10 @@ struct ContentView: View {
                                 if (searchText.isEmpty == false) {
                                     Task {
                                         
-//                                        let fetchedCities = await fetchCity(name: searchText)
-//                                        DispatchQueue.main.async {
-//                                            cities = fetchedCities
-//                                        }
+                                        let fetchedCities = await fetchCity(name: searchText)
+                                        DispatchQueue.main.async {
+                                            cities = fetchedCities
+                                        }
                                     }
                                     
                                 } else {
@@ -134,8 +130,8 @@ struct ContentView: View {
                                 if (locationManager.cityLocation != nil) {
                                     print("Geolocation pressed and cityLocation exist !")
                                     Task {
-//                                        let cityInfoFetching = await fetchCityInfo(city: locationManager.cityLocation!)
-//                                        locationManager.cityInfo = cityInfoFetching
+                                        let cityInfoFetching = await fetchCityInfo(city: locationManager.cityLocation!)
+                                        locationManager.cityInfo = cityInfoFetching
                                     }
                                 } else {
                                     print("Geolocation pressed but cityLocation not exist !")
@@ -197,10 +193,10 @@ struct ContentView: View {
                                 locationManager.cityLocation = city
                                 if (locationManager.cityLocation != nil) {
                                     Task {
-//                                        locationManager.isFetchingCityInfo = true
-//                                        let cityInfoFetching = await fetchCityInfo(city: locationManager.cityLocation!)
-//                                        locationManager.cityInfo = cityInfoFetching
-//                                        locationManager.isFetchingCityInfo = false
+                                        locationManager.isFetchingCityInfo = true
+                                        let cityInfoFetching = await fetchCityInfo(city: locationManager.cityLocation!)
+                                        locationManager.cityInfo = cityInfoFetching
+                                        locationManager.isFetchingCityInfo = false
                                     }
                                     
                                 } else {
@@ -252,16 +248,15 @@ struct ContentView: View {
                     if (locationManager.isFetchingCityInfo == false) {
                         if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
                             
-//                            CurrentlyView(cityInfo: locationManager.cityInfo)
-//                                .navigationTitle("Currently")
-//                                .tabItem {
-//                                    VStack {
-//                                        Image(systemName: "sun.min")
-//                                        Text("Currently")
-//
-//                                    }
-//                                }
-//                                .tag(Tab.currently)
+                            CurrentView(cityInfo: locationManager.cityInfo)
+                                .navigationTitle("Currently")
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "sun.min")
+                                        Text("Currently")
+                                    }
+                                }
+                                .tag(Tab.currently)
                             
                         } else {
                             if (locationManager.cityLocation == nil) {
@@ -289,14 +284,14 @@ struct ContentView: View {
                     if (locationManager.isFetchingCityInfo == false) {
                         if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
                             
-//                            TodayView(cityInfo: locationManager.cityInfo)
-//                                .tabItem {
-//                                    VStack {
-//                                        Image(systemName: "calendar.day.timeline.left")
-//                                        Text("Today")
-//                                    }
-//                                }
-//                                .tag(Tab.today)
+                            TodayView(cityInfo: locationManager.cityInfo)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "calendar.day.timeline.left")
+                                        Text("Today")
+                                    }
+                                }
+                                .tag(Tab.today)
                             
                         } else {
                             if (locationManager.cityLocation == nil) {
@@ -324,14 +319,14 @@ struct ContentView: View {
                     if (locationManager.isFetchingCityInfo == false) {
                         if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
                             
-//                            WeeklyView(cityInfo: locationManager.cityInfo)
-//                                .tabItem {
-//                                    VStack {
-//                                        Image(systemName: "calendar")
-//                                        Text("Weekly")
-//                                    }
-//                                }
-//                                .tag(Tab.weekly)
+                            WeeklyView(cityInfo: locationManager.cityInfo)
+                                .tabItem {
+                                    VStack {
+                                        Image(systemName: "calendar")
+                                        Text("Weekly")
+                                    }
+                                }
+                                .tag(Tab.weekly)
                             
                         } else {
                             if (locationManager.cityLocation == nil) {
@@ -369,7 +364,6 @@ struct ContentView: View {
         .ignoresSafeArea(edges: searchBarNoAnimation ? [] : .bottom)
     }
 }
-
 
 #Preview {
     ContentView()

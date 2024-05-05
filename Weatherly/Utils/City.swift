@@ -28,12 +28,10 @@ struct City: Codable {
 
 struct CityInfo: Codable {
     var city: City?
-    
     // CURRENT TAB
     var current: CurrentData?
     // TODAY TAB
     var hourly: HourlyData?
-    
     var daily: WeeklyData?
     // WEEKLY TAB
     //    var weatherDateList: [Array<AnyObject>]
@@ -209,5 +207,18 @@ func getGraphLineColor(cityInfo: CityInfo?) -> Color {
         return weatherInfo!.graphDayColor
     } else {
         return weatherInfo!.graphNightColor
+    }
+}
+
+
+func getOpacityByWeather(cityInfo: CityInfo?) -> Double {
+    let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: cityInfo?.current?.weather_code)
+    if (weatherInfo == nil) {
+        return 0.5
+    }
+    if (cityInfo?.current?.is_day == 1) {
+        return weatherInfo!.dayOpacity
+    } else {
+        return weatherInfo!.nightOpacity
     }
 }
