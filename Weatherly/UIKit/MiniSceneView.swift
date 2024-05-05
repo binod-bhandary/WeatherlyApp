@@ -6,14 +6,15 @@
 //
 import SwiftUI
 import SceneKit
-
+//A UIViewRepresentable struct to integrate a SceneKit view(SCNView) within SwiftUI
 struct MiniSceneView: UIViewRepresentable {
 //    @Binding var scene: SCNScene?
-    let sceneName: String
-    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"]
-    
+    let sceneName: String //Name of the scene to be loaded, determining the type of weather visualization
+    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"] //Array of identifiers for elements representing sunlight in the 3D scene
+    //creates and returns an initialized SCNview for use in swiftUI
     func makeUIView(context: Context) -> SCNView {
         let view = SCNView()
+        //Try to retrieve the specified 3D model;if not found, attempt to load from the file,otherwise set background to clear and return the view
         var scene = get3DModel(sceneName: sceneName)
         if (scene == nil) {
             scene = .init(named: "\(sceneName).scn")
@@ -23,13 +24,15 @@ struct MiniSceneView: UIViewRepresentable {
             }
         }
         
-//        view.allowsCameraControl = true
+//        view.allowsCameraControl = true,setup default lighting for better visual quality
         view.autoenablesDefaultLighting = true
         view.antialiasingMode = .multisampling2X
+        //Assign the loaded scene to the SCNView
         view.scene = scene
         view.backgroundColor = .clear
-        
+        //Apply specific effects based on the scene name
         if (sceneName == "sunny") {
+            //Add fade-in effect and bloom to elements representing the sun below statements are other additional conditions for other weather types
             let fadeInAction = SCNAction.fadeOpacity(by: 0.2, duration: 0.5)
             view.scene?.rootNode.runAction(fadeInAction)
             for elt in sunshine {
@@ -149,11 +152,11 @@ struct MiniSceneView: UIViewRepresentable {
         return view
         
     }
-    
+    //It can confirm the UIViewRepresentable protoctol,no updateds need for the view after creation
     func updateUIView(_ uiView: SCNView, context: Context) {
         
     }
-    
+    //Helper function to add a bloom effect to a node in the scene
     func addBloom(intensity: Double?, radius: Double?) -> [CIFilter]? {
         let bloomFilter = CIFilter(name:"CIBloom")!
         bloomFilter.setValue(intensity ?? 0.5, forKey: "inputIntensity")
