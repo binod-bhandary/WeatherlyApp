@@ -7,24 +7,27 @@
 
 import SwiftUI
 
-
+//Defines a view that presents weather info for the current day
 struct TodayView: View {
     var cityInfo: CityInfo?
     var body: some View {
+        //Conditional rendering based on the availability of cityinfo
         if (cityInfo != nil) {
             ScrollView {
                 VStack {
+                    //Embeds the todaychart view which visualizes hourly weather data such as temperature
                     TodayChart(cityInfo: cityInfo, hourly: cityInfo?.hourly)
+                    //Additional content that might include ohter weather details or forcast
                     ScrollViewContent()
                 }
             }
         } else {
-            Text("Unable to display the data. Please try again.")
+            Text("Unable to display the data. Please try again.")//fallback text displayed when no city info data is available
         }
       
     }
     
-    // functions defined
+    // functions defined, it can determines the appropriate thermometer icon based on temperature
     
     func getTempLogo(temperature: Double) -> String {
         if (temperature > 25) {
@@ -35,7 +38,7 @@ struct TodayView: View {
             return ("thermometer.low")
         }
     }
-    
+    //This function returns the current hour as a string based on the provided timezone
     func getCurrentHour(timezone: String?) -> String {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
@@ -46,7 +49,7 @@ struct TodayView: View {
         let currentHourString = dateFormatter.string(from: currentDate)
         return currentHourString
     }
-    
+    //Determines if the current hour is the sunset hour
     func isSunsetHour(currentHour: String, sunsetTime: String?) -> Bool {
         guard let sunsetTime = sunsetTime else { return false }
         guard let sunsetHour = Int(sunsetTime.suffix(5).prefix(2)) else { return false }
@@ -56,7 +59,7 @@ struct TodayView: View {
         }
         return false
     }
-    
+    //Determine if the current hour is  sunrise hour
     func isSunriseHour(currentHour: String, sunriseTime: String?) -> Bool {
         guard let sunriseTime = sunriseTime else { return false }
         guard let sunriseHour = Int(sunriseTime.suffix(5).prefix(2)) else { return false }
@@ -67,7 +70,7 @@ struct TodayView: View {
         return false
     }
     
-    
+    //Determine if it is currently night time based on sunset and sunrise time
     func isNight(currentHour: String, sunsetTime: String?, sunriseTime: String?) -> Bool {
         guard let sunsetTime = sunsetTime else { return false }
         guard let sunriseTime = sunriseTime else { return false }
@@ -82,7 +85,7 @@ struct TodayView: View {
         return false
         
     }
-    
+    //A view builder function that creates additional scrollable content for the view
     @ViewBuilder
     func ScrollViewContent() -> some View {
         ScrollView(.horizontal) {
@@ -167,7 +170,7 @@ struct TodayView: View {
         .padding(.horizontal)
     }
 }
-
+//sample data
 #Preview {
     //    return ContentView()
     let jsonString = """
