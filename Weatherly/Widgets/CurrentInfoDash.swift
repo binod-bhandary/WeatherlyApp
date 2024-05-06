@@ -7,16 +7,18 @@
 
 import Foundation
 import SwiftUI
+//Defines a swiftui view that displays a dashboard for current weather info
 struct CurrentInfoDash: View {
+    //optional properties to hold weather data that might not always be available
     var wind_speed: Double?
     var humidity: Int8?
     var precipitation_probability: Int8?
-    
+    //The horizontal stack to arrange the labels and values in a row
     var body: some View {
         HStack(alignment: .center) {
             Spacer()
             VStack(spacing: 8) {
-                
+                //wind speed section
                 HStack(spacing: 4) {
                     Image(systemName: "wind")
                         .font(.system(size: 14))
@@ -25,7 +27,7 @@ struct CurrentInfoDash: View {
                         .font(.system(size: 13, weight: .light))
                         .opacity(0.8)
                 }
-//                .background(.blue)
+//                .background(.blue),try to show wind speed is availabe,otherwise show placeholder
                 if (wind_speed != nil) {
                     Text("\(String(format: "%.1f", (wind_speed!)))km/h")
                         .font(.system(size: 14, weight: .semibold, design: .rounded))
@@ -41,7 +43,7 @@ struct CurrentInfoDash: View {
                 .background(.white.opacity(0.8))
                 .padding(.vertical)
             VStack(spacing: 8) {
-                
+                //humidity section
                 HStack(spacing: 4) {
                     Image(systemName: "humidity")
                         .font(.system(size: 14))

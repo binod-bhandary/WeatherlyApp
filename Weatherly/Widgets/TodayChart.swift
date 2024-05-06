@@ -10,7 +10,7 @@ import Foundation
 import SwiftUI
 import Charts
 
-
+//Define a data structure for each hour of weather data to be displayed on a chart
 struct ChartHourData {
     var id = UUID()
     var time: String
@@ -31,7 +31,7 @@ func convertToHours(timeString: String) -> Date {
     return date
 }
 
-
+//Convert hourly weather data into a format suitable for displaying a chart
 func hourlyToChartsData(hourly: HourlyData?) -> [ChartHourData] {
     var chartDataArray: [ChartHourData] = []
     for i in 0 ..< min(24, hourly!.time.count) {
@@ -40,7 +40,7 @@ func hourlyToChartsData(hourly: HourlyData?) -> [ChartHourData] {
     }
     return chartDataArray
 }
-
+//swiftui view for displaying hourly weather data as a chart
 struct TodayChart: View {
     var cityInfo: CityInfo?
     var hourly: HourlyData?
