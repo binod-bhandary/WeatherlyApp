@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-
+//A structure to hold daily chart data include the min and max temperature
 struct ChartDayData {
     var id = UUID()
     var time: String
@@ -16,7 +16,7 @@ struct ChartDayData {
     var temperature_2m_min: Double
     var temperature_2m_max: Double
 }
-
+//function to convert a time string into a date object
 func convertToDate(timeString: String) -> Date {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -26,24 +26,25 @@ func convertToDate(timeString: String) -> Date {
     let date = dateFormatter.date(from: timeString)!
     return date
 }
-
+//function to transform weekly data into a format suitable for charting
 func weeklyToChartsData(weekly: WeeklyData?) -> [ChartDayData] {
     var chartDataArray: [ChartDayData] = []
+    //Ensure weekly data is available and limit the loop to 24 entries or the count of days
     for i in 0 ..< min(24, weekly!.time.count) {
-        
+        //create a chartdaydata object for each day
         let chartData = ChartDayData(time: weekly!.time[i], timeDate: convertToDate(timeString: weekly!.time[i]), temperature_2m_min: weekly!.temperature_2m_min[i], temperature_2m_max: weekly!.temperature_2m_max[i])
-        chartDataArray.append(chartData)
+        chartDataArray.append(chartData)//append to the array
     }
     return chartDataArray
 }
-
+//swiftUI view for displaying a weekly temperature chart
 struct WeeklyChart: View {
     
     var cityInfo: CityInfo?
     var weekly: WeeklyData?
 
     var body: some View {
-        let chartsData: [ChartDayData] = weeklyToChartsData(weekly: self.weekly)
+        let chartsData: [ChartDayData] = weeklyToChartsData(weekly: self.weekly)//convert weekly data to chart data
 
         VStack(spacing: 2) {
             Text("Weekly temperatures")
@@ -67,6 +68,7 @@ struct WeeklyChart: View {
                             .fill(.white)
                             .frame(width: 4)
                     }
+                    //Line mark for min temperature
                     LineMark(
                         x: .value("Day", chartDay.timeDate, unit: .day),
                         y: .value("Min", chartDay.temperature_2m_min),
@@ -149,7 +151,7 @@ struct WeeklyChart: View {
         .padding()
     }
 }
-
+//Below is a sample preview setup to visualize the component
 #Preview {
     
     let jsonString = """
@@ -205,6 +207,7 @@ struct WeeklyChart: View {
     } catch {
         // Handle decoding error
         print("Error decoding JSON:", error)
-        return Text("Invalid previews")
+        //return Text("Invalid previews")
+        return Text("Error: \(error.localizedDescription)").foregroundColor(.red)
     }
 }

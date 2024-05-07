@@ -9,7 +9,7 @@
 import SwiftUI
 import SceneKit
 
-// only for preview
+// only for preview， and it represents a swiftUI view that encapsulates a SceneKit view, typically used to display 3D content
 struct LoadingUIViewRepresentable: View {
     var body: some View {
         BasicLoadingUIViewRepresentable(sceneName: "cloudy_night").frame(height: 350)
@@ -24,22 +24,23 @@ struct LoadingUIViewRepresentable: View {
 // representative class
 struct BasicLoadingUIViewRepresentable : UIViewRepresentable {
     
-    let sceneName: String
+    let sceneName: String //Name of the scene to be loaded, which dictates the weather condition to display
     
-    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"]
-    
+    let sunshine = ["Cylinder_001", "Cylinder_002", "Cylinder_003", "Cylinder_004", "Cylinder_005", "Cylinder_006", "Cylinder_007", "Cylinder_008", "Cylinder_009", "Cylinder_010", "Cylinder_011", "Cylinder_012"] //Array of cylinder object names used in the "sunny" scene for shown
+    //Creates the SceneKit view and configures it according to the sceneName
     func makeUIView(context: Context) -> SCNView {
         print(sceneName)
         let view = SCNView ()
-        var scene = get3DModel(sceneName: sceneName)
+        var scene = get3DModel(sceneName: sceneName)//Attempts to load a 3D model based on the sceneName
         if (scene == nil) {
+            //If no model is found, try to load from the file
             scene = .init(named: "\(sceneName).scn")
             if (scene == nil) {
-                view.backgroundColor = .clear
+                view.backgroundColor = .clear//ensure the view is transparent if no scene is loaded
                 return view
             }
         }
-        
+        //Basic SceneKit view configurations for better visual quality
         var rootOpacity = 1.0
         var opacityDuration = 1.0
         
@@ -50,7 +51,7 @@ struct BasicLoadingUIViewRepresentable : UIViewRepresentable {
         view.scene = scene
         view.backgroundColor = .clear
     
-        // Apply fade in effect
+        // Apply fade in effect,below are different animations and effects based on the sceneName
         view.scene?.rootNode.opacity = 0.0
         if (sceneName == "sunny") {
             rootOpacity = 0.1
@@ -224,40 +225,40 @@ struct BasicLoadingUIViewRepresentable : UIViewRepresentable {
         
         return view
    }
-    
+    //placeholder function required by UIViewRepresentable to update the view with new data
     func updateUIView(_ uiView: UIViewType, context: Context) {
         
     }
     
-    // extra functions
+    // extra functions, function to apply scale animations to a node
     
     private func scaleAnimation(node: SCNNode, from: Double, to: Double) {
-        let scaleAction = SCNAction.scale(to: from, duration: 2)
+        let scaleAction = SCNAction.scale(to: from, duration: 2) //Create a scaling action to the specified size
         scaleAction.timingMode = .easeInEaseOut
-        let reverseScaleAction = SCNAction.scale(to: to, duration: 2)
-        reverseScaleAction.timingMode = .easeInEaseOut
+        let reverseScaleAction = SCNAction.scale(to: to, duration: 2)//set the timing mode to smooth the animation start and end
+        reverseScaleAction.timingMode = .easeInEaseOut//Also smoothens the reverse action
         let disappearAndReverseScale = SCNAction.sequence([scaleAction, reverseScaleAction])
-        let repeatAction = SCNAction.repeatForever(disappearAndReverseScale)
-        node.runAction(repeatAction)
+        let repeatAction = SCNAction.repeatForever(disappearAndReverseScale)//repeat the sequence indefinitely
+        node.runAction(repeatAction)//starts the animation on the node
     }
-    
+    //function to apply rotation animations to a node
     private func rotationAnimation(node: SCNNode) {
-        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: 1), duration: 4)
-        startAction.timingMode = .linear
+        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: 1), duration: 4)//creates a rotation action around the z-axis
+        startAction.timingMode = .linear//use a linear timing mode for consistent speed
         let sequenceAction = SCNAction.sequence([startAction])
-        let repeatAction = SCNAction.repeatForever(sequenceAction)
-        node.runAction(repeatAction)
+        let repeatAction = SCNAction.repeatForever(sequenceAction)//Makes the rotation continue indefinitely
+        node.runAction(repeatAction)//Applied the rotation action to the node
 
     }
-    
+    //Example of a more specific animation that might toggle visibility or other properties
     private func starAnimation(node: SCNNode, direction: Bool) {
-        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: direction ? 1 : -1), duration: 0.5)
+        let startAction = SCNAction.rotate(by: 1, around: SCNVector3(x: 0, y: 0, z: direction ? 1 : -1), duration: 0.5)//determines the direction of rotation based on a boolean value
         startAction.timingMode = .linear
         let sequenceAction = SCNAction.sequence([startAction])
         let repeatAction = SCNAction.repeatForever(sequenceAction)
-        node.runAction(repeatAction)
+        node.runAction(repeatAction)//starts the animation on the node
     }
-    
+    //Function for rainfall animation, demonstrating movement and visibility changes
     private func rainfallAnimation(node: SCNNode, speedIntervals: [Double]) {
         let startAction = SCNAction.move(by: SCNVector3(-0.15, 0, -0.25), duration: Double.random(in: speedIntervals[0]..<speedIntervals[1]))
         let disappearAction = SCNAction.fadeOut(duration: Double.random(in: speedIntervals[0]..<speedIntervals[1]))
@@ -273,7 +274,7 @@ struct BasicLoadingUIViewRepresentable : UIViewRepresentable {
         let repeatAction = SCNAction.repeatForever(sequenceAction)
         node.runAction(repeatAction)
     }
-    
+    //similar to above one
     private func snowfallAnimation(node: SCNNode, speedIntervals: [Double]) {
         let startAction = SCNAction.move(by: SCNVector3(-0.05, 0, -0.25), duration: Double.random(in: speedIntervals[0]..<speedIntervals[1]))
         let disappearAction = SCNAction.fadeOut(duration: Double.random(in: speedIntervals[0]..<speedIntervals[1]))
@@ -289,11 +290,11 @@ struct BasicLoadingUIViewRepresentable : UIViewRepresentable {
         let repeatAction = SCNAction.repeatForever(sequenceAction)
         node.runAction(repeatAction)
     }
-    
+    //function to create a looping animation that alternates between appearing and disappearing
     private func startLoopAnimation(_ node: SCNNode) {
-        let appearAction = SCNAction.fadeIn(duration: 1)
-        let scaleAction = SCNAction.scale(to: 1, duration: 1)
-        scaleAction.timingMode = .easeInEaseOut
+        let appearAction = SCNAction.fadeIn(duration: 1)//fades the node in over 1 second
+        let scaleAction = SCNAction.scale(to: 1, duration: 1) //scales the node up to its original size
+        scaleAction.timingMode = .easeInEaseOut//smooths the scaling animation
         let reverseScaleAction = SCNAction.scale(to: 0.8, duration: 1)
         reverseScaleAction.timingMode = .easeInEaseOut
         let disappearAction = SCNAction.fadeOut(duration: 1)
@@ -306,11 +307,11 @@ struct BasicLoadingUIViewRepresentable : UIViewRepresentable {
         node.runAction(repeatAction)
     }
     
-    
+    //function to create and apply a bloom effect using core image filters
     func addBloom(intensity: Double?, radius: Double?) -> [CIFilter]? {
-        let bloomFilter = CIFilter(name:"CIBloom")!
-        bloomFilter.setValue(intensity ?? 0.5, forKey: "inputIntensity")
-        bloomFilter.setValue(radius ?? 10.0, forKey: "inputRadius")
+        let bloomFilter = CIFilter(name:"CIBloom")!//instantiates a new bloom filter
+        bloomFilter.setValue(intensity ?? 0.5, forKey: "inputIntensity") //set the intensity of the bloom
+        bloomFilter.setValue(radius ?? 10.0, forKey: "inputRadius")//sets the radius of the bloom
 
         return [bloomFilter]
     }
