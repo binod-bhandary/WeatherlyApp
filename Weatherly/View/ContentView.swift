@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocationUI
 struct ContentView: View {
     @State private var cities = [City]()
     @State private var searchText = ""
@@ -19,16 +20,10 @@ struct ContentView: View {
     @Environment (\.colorScheme) var colorScheme
     @ObservedObject var locationManager = LocationManager.shared
     
-    private var tabName: String {
-        switch selectedTab {
-        case .currently:
-            return "Currently"
-        case .today:
-            return "Today"
-        case .weekly:
-            return "Weekly"
-        }
-    }
+
+    @State private var cityName : String = "-"
+    @State private var cityCountry : String = "-"
+    
     init() {
         UITabBar.appearance().isHidden = true
     }
@@ -40,13 +35,11 @@ struct ContentView: View {
     func cancelSearchLocation() -> Void {
         hideKeyboard()
         // Wait for the keyboard to hide before performing animation
-        //        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         searchBarNoAnimation = false
-        withAnimation(.easeInOut(duration: 0.2)) {
+        withAnimation(.easeInOut(duration: 0.1)) {
             showSearchBar = false
         }
         focusedSearch = false
-        //        }
     }
     var body: some View {
         let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: LocationManager.shared.cityInfo?.current?.weather_code ?? -1)
@@ -55,10 +48,14 @@ struct ContentView: View {
             HStack {
                 // TITLE
                 if (showSearchBar == false) {
-                    Text(tabName)
-                        .fontWeight(.bold)
-                        .font(.largeTitle)
-                        .foregroundStyle(colorScheme == .dark ? .white : .black)
+                    VStack(spacing: 1) {
+                        Text(cityName)
+                            .fontWeight(.bold)
+                            .font(.largeTitle)
+                            .foregroundStyle(colorScheme == .dark ? .white : .black)
+                        Text(cityCountry)
+                            .font(.title3)
+                    }
                     Spacer()
                 }
                 
@@ -224,19 +221,18 @@ struct ContentView: View {
                 })
             }
             else {
-                
+                // set city info values
                 if (locationManager.isFetchingCityInfo == false && locationManager.cityInfo != nil) {
-                    VStack {
-                        Text(locationManager.cityInfo?.city?.name ?? "Unknown")
+                     VStack {
+                        Text(weatherInfo?.dayDescription ?? "")
                             .bold()
                             .font(.title)
+                            .onAppear{
+                                cityName = locationManager.cityInfo?.city?.name ?? "-"
+                                cityCountry = (locationManager.cityInfo?.city?.admin1 ?? "Unknown") + ", " + (locationManager.cityInfo?.city?.country ?? "Unknown")
+                            }
                         HStack {
-                            Text(locationManager.cityInfo?.city?.admin1 ?? "Unknown")
-                                .font(.title3)
-                            + Text(", ")
-                                .font(.title3)
-                            + Text(locationManager.cityInfo?.city?.country ?? "Unknown")
-                                .font(.title3)
+                            Text("Infomation")
                         }
                         Text("")
                     }
@@ -247,7 +243,7 @@ struct ContentView: View {
                 TabView(selection: $selectedTab) {
                     if (locationManager.isFetchingCityInfo == false) {
                         if (locationManager.cityLocation != nil && locationManager.cityInfo != nil) {
-                            
+                           
                             CurrentView(cityInfo: locationManager.cityInfo)
                                 .navigationTitle("Currently")
                                 .tabItem {
@@ -260,10 +256,18 @@ struct ContentView: View {
                             
                         } else {
                             if (locationManager.cityLocation == nil) {
-                                Text("Geolocation is not available, please enable it in your App settings.")
-                                    .multilineTextAlignment(.center)
-                                    .padding()
-                                    .tag(Tab.currently)
+//                                Text("Geolocation is not available, please enable it in your App settings.")
+//                                    .multilineTextAlignment(.center)
+//                                    .padding()
+//                                    .tag(Tab.currently)
+                                
+                                LocationButton(.shareCurrentLocation) {
+                                    locationManager.requestLocation()
+                                }
+                                .cornerRadius(30)
+                                .symbolVariant(.fill)
+                                .foregroundColor(.white)
+                                
                             } else if (locationManager.cityInfo == nil) {
                                 Text("The service connection is lost, please check your internet connection or try again later")
                                     .multilineTextAlignment(.center)
@@ -334,6 +338,7 @@ struct ContentView: View {
                                     .multilineTextAlignment(.center)
                                     .padding()
                                     .tag(Tab.weekly)
+                                
                             } else if (locationManager.cityInfo == nil) {
                                 Text("The service connection is lost, please check your internet connection or try again later")
                                     .multilineTextAlignment(.center)
@@ -356,6 +361,7 @@ struct ContentView: View {
                 .searchable(text: $searchText)
                 .tabViewStyle(.page(indexDisplayMode: .never))
                 AppViewBar(selectedTab: $selectedTab)
+//                LocationView()
             }
         }
         .preferredColorScheme(.dark)
