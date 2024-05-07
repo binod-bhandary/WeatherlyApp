@@ -41,8 +41,13 @@ struct CurrentView: View {
                         }
                     }
                     //            }
+                    CurrentInfoDash(
+                        wind_speed: cityInfo?.current?.wind_speed_10m,
+                        humidity: cityInfo?.current?.relative_humidity_2m,
+                        precipitation_probability: cityInfo?.current?.precipitation_probability
+                    )
                     
-                    CurrentInfoDash(wind_speed: cityInfo?.current?.wind_speed_10m, humidity: cityInfo?.current?.relative_humidity_2m, precipitation_probability: cityInfo?.current?.precipitation_probability)
+                    
                     
                     //            Spacer()
                 }

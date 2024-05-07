@@ -48,7 +48,6 @@ func fetchCity(name: String) async -> [City] {
         LocationManager.shared.isFetchingCityList = true
     }
     let urlString = "https://geocoding-api.open-meteo.com/v1/search?name=\(name)&count=5&language=en&format=json"
-//    print(urlString)
     // Create URL
     guard let url = URL(string: urlString) else {
         print("This request has failed please try with an other URL...")
