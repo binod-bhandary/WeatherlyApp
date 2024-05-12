@@ -33,3 +33,14 @@ struct RoundedCorner: Shape {
         return Path(path.cgPath)
     }
 }
+
+extension String {
+    func toDate(dateFormat: String) -> Date? {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        
+        let date: Date? = dateFormatter.date(from: self)
+        return date
+    }
+}

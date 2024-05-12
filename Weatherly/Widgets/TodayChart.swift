@@ -40,7 +40,20 @@ func hourlyToChartsData(hourly: HourlyData?) -> [ChartHourData] {
     }
     return chartDataArray
 }
-//swiftui view for displaying hourly weather data as a chart
+
+var timeFormatter: DateFormatter {
+//    let df = DateFormatter()
+//    df.dateFormat = "dd/MM"
+//    df.dateStyle = .medium
+//    df.timeStyle = .short
+//    df.doesRelativeDateFormatting = true
+    let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    return formatter
+}
+
 struct TodayChart: View {
     var cityInfo: CityInfo?
     var hourly: HourlyData?
@@ -84,18 +97,11 @@ struct TodayChart: View {
                 AxisMarks(preset: .aligned, values: .stride(by: .hour, count: 3)) { axisValue in
                     if let date = axisValue.as(Date.self) {
                         AxisValueLabel() {
-                            var formatter = DateFormatter()
-                            // need to fix
-//                                formatter.dateFormat = "HH:mm"
-//                                formatter.locale = Locale(identifier: "en_US_POSIX")
-//                                formatter.timeZone = TimeZone(secondsFromGMT: 0)
-                            let formattedDate = formatter.string(from: date)
-                            
                             if (axisValue.index == 8) {
                                 Text("").font(.system(size: 8))
                             }
                             
-                            Text("\(formattedDate)")
+                            Text("\(date, formatter: timeFormatter)")
                                 .foregroundColor(Color.white)
                                 .font(.system(size: 8))
                         }
@@ -145,8 +151,8 @@ struct TodayChart: View {
             "current": {
                 "time": "2024-04-04T11:30",
                 "temperature_2m": 14.6,
-                "is_day": 0,
-                "weather_code": 1,
+                "is_day": 1,
+                "weather_code": 95,
                 "wind_speed_10m": 18.9
             },
             "hourly": {
@@ -156,15 +162,19 @@ struct TodayChart: View {
                                   "2024-04-04T20:00", "2024-04-04T21:00", "2024-04-04T22:00", "2024-04-04T23:00",],
                 "temperature_2m": [13.0, 7.8, 13.3, 13.2, 25, 26.7, 28.1, 29.5, 30.2, 31.8, 32.5, 32.9, 33.2, 33.5, 33.8, 33.9, 33.6, 33.2, 32.8, 32.5, 32.2,
                                                                                                                                     32.0, 31.8, 31.5, 31.2, 30.9, 30.6, 30.3, 30.0],
-                "weather_code": [2, 61, 61, 61, 61, 61, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32],
+                "weather_code": [2, 61, 61, 61, 61, 61, 45, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 61, 61, 61, 61, 61, 61, 61, 61, 86, 95],
                 "wind_speed_10m": [18.2, 17.3, 18.7, 17.2, 19, 20.1, 21.5, 22.3, 23.6, 24.9, 25.3, 25.8, 26.2, 26.5, 26.7, 26.8, 26.6, 26.3, 26.0, 25.7, 25.4,
-                                                                                                                                                                                                                                                                                                                                         25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0]
+                                                                                                                                                                                                                                                                                                                                         25.1, 24.8, 24.5, 24.2, 23.9, 23.6, 23.3, 23.0],
+                "sunrise": "2024-04-04T04:09",
+                "sunset": "2024-04-04T18:09",
             },
             "daily": {
                 "time": ["2024-04-04", "2024-04-05", "2024-04-06"],
                 "weather_code": [80, 61, 3],
                 "temperature_2m_max": [18.4, 17.2, 24.9],
-                "temperature_2m_min": [12.0, 13.0, 12.1]
+                "temperature_2m_min": [12.0, 13.0, 12.1],
+                "sunset": ["2024-04-04T04:09", "2024-04-05T04:09", "2024-04-04T06:09"],
+                "sunrise": ["2024-04-04T18:09", "2024-04-05T18:09", "2024-04-06T18:09"],
             }
         }
         """
