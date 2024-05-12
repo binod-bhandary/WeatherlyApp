@@ -25,7 +25,7 @@ struct City: Codable {
     var country: String?
     var admin1: String? //  Région
 }
-
+//stored the detail info of city
 struct CityInfo: Codable {
     var city: City?
     // CURRENT TAB
@@ -36,7 +36,7 @@ struct CityInfo: Codable {
     // WEEKLY TAB
     //    var weatherDateList: [Array<AnyObject>]
 }
-
+//current weather data structure
 struct CurrentData: Codable {
     var time: String
     var temperature_2m: Double
@@ -49,7 +49,7 @@ struct CurrentData: Codable {
         time.isEmpty == false ? dateFormatter.date(from: time) : nil
     }
 }
-
+//hourly weather data structure
 struct HourlyData: Codable {
     var time: Array<String>
     var temperature_2m: Array<Double>
@@ -58,7 +58,7 @@ struct HourlyData: Codable {
     var sunrise: String?
     var sunset: String?
 }
-
+//weekly weather data structure
 struct WeeklyData: Codable {
     var time: Array<String>
     var weather_code: Array<Int8>
@@ -69,7 +69,7 @@ struct WeeklyData: Codable {
 }
 
 
-
+//weather info and visual structure
 struct WeatherInfo {
     let dayDescription: String
     let nightDescription: String
@@ -83,10 +83,10 @@ struct WeatherInfo {
     let nightOpacity: Double
 }
 
-// 3d models
+// 3d models that store the scnscense and name
 
 let models3D: [String: SCNScene?] = [:]
-
+//get the corresponding 3D model based on the scene name
 func get3DModel(sceneName: String) -> SCNScene? {
     if let model = models3D[sceneName] {
         return model
@@ -95,7 +95,7 @@ func get3DModel(sceneName: String) -> SCNScene? {
 }
 
 
-// function
+// function based on the weather code to get the weather info and show it
 func getWeatherInfo(weather_code: Int8?) -> WeatherInfo? {
     if (weather_code == nil) {
         return nil
@@ -103,7 +103,7 @@ func getWeatherInfo(weather_code: Int8?) -> WeatherInfo? {
     return (WeatherMap.data["\(weather_code!)"] ?? nil)
 }
 
-
+//static data mapping, it will map weather codes to specific weatherInfo
 struct WeatherMap {
     static let data: [String: WeatherInfo] = [
         "0": WeatherInfo(dayDescription: "Sunny", nightDescription: "Clear", dayModel: "sunny", nightModel: "clear_moon", colorDay: [.yellow.opacity(0.97), .yellow.opacity(0.95)], colorNight: [.indigo.opacity(0.5), .indigo.opacity(0.7)], graphDayColor: .yellow, graphNightColor: .indigo, dayOpacity: 0.45, nightOpacity: 0.3),
@@ -173,55 +173,79 @@ struct WeatherMap {
 }
 
 
-
+//function to determine the appropriate background gradient based on weather info and UI context
 func getRealBackground(cityInfo: CityInfo?, weatherInfo: WeatherInfo?, showSearchBar: Bool) -> LinearGradient {
+    //check if the search bar is displayed
     if (showSearchBar) {
+        //return a plain black gradient background when the search bar is active.
+        //This provides a neutral background that does not distract from the search bar
         return LinearGradient(colors: [Color.black], startPoint: .center, endPoint: .center)
     } else if (weatherInfo != nil) {
+        //check if the weather info is available and determine background gradient based on the time of day
         if (cityInfo?.current?.is_day == 0) {
+            //If it is night,it use the night colors defined in the weather info for the background and this typically include darker, more subdued color
             return LinearGradient(colors: weatherInfo!.colorNight, startPoint: .top, endPoint: .bottom)
         } else {
+            //If it is day, use the day colors defined in the weather info for the background, these are usually brighter and more vibrant to reflect daylight conditions
             return  LinearGradient(colors: weatherInfo!.colorDay, startPoint: .top, endPoint: .bottom)
         }
     } else {
+        //If not specific weather info is available, return a default purple to gradient background. This default is used when no specific conditions are known to ensure the UI remains visually.
         return LinearGradient(
             gradient: Gradient(colors: [.purple.opacity(0.7), .indigo.opacity(0.9)]), startPoint: .top, endPoint: .bottom)
     }
 }
-
+//function to determine the gradient colors for the graph based on the current weather condition
 func getGradientGraph(cityInfo: CityInfo?) -> [Color] {
+    //Attempt to fetch weather info based on the weather code in the city info
     let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: cityInfo?.current?.weather_code)
+    //check if weather info is available
     if (weatherInfo == nil) {
+        
         return [.white, .white.opacity(0.7), .white.opacity(0.05)]
     }
+    //Returns a gradient array with colors from the weather info for daytime, adjusted for opacity
     if (cityInfo?.current?.is_day == 1) {
         return [weatherInfo!.graphDayColor, weatherInfo!.graphDayColor.opacity(0.7), weatherInfo!.graphDayColor.opacity(0.05)]
     } else {
+        //If it is night, return a gradient array with colors from the weather info for night time adjusted for opacity
         return [weatherInfo!.graphNightColor, weatherInfo!.graphNightColor.opacity(0.7), weatherInfo!.graphNightColor.opacity(0.05)]
     }
 }
-
+//function to determine the appropriate line color for graphs based on the current weather condition
 func getGraphLineColor(cityInfo: CityInfo?) -> Color {
+    //Attempt to fetch weather info based on the weather code in the city info
     let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: cityInfo?.current?.weather_code)
+    //check if weather info is available
     if (weatherInfo == nil) {
+        //if no specific weather info available, return a default white color
         return .white
     }
+    //Determine the time of day to select the appropriate color
     if (cityInfo?.current?.is_day == 1) {
+        //if it is daytime, return the day graph color from the weather info
         return weatherInfo!.graphDayColor
     } else {
+        //if it is nigh time, return the night graph color from the weather info
         return weatherInfo!.graphNightColor
     }
 }
 
 
 func getOpacityByWeather(cityInfo: CityInfo?) -> Double {
+    //Attempts to fetch weather info based on the weather code in the city info
     let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: cityInfo?.current?.weather_code)
+    //check if weather info is available
     if (weatherInfo == nil) {
+        //if no specific weather info is available, return a default opacity 0.5
         return 0.5
     }
+    //Determine the time of day to select the appropriate opacity
     if (cityInfo?.current?.is_day == 1) {
+        //If it is daytime, return the day opacity from the weather info
         return weatherInfo!.dayOpacity
     } else {
+        //Otherwise return the nigh opacity from the weather info
         return weatherInfo!.nightOpacity
     }
 }

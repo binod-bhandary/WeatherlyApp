@@ -7,28 +7,28 @@
 
 import SwiftUI
 
-
+//Define an eum for tab management with associated system image as raw value
 enum Tab: String, CaseIterable {
-    case currently = "sun.max"
-    case today = "clock"
-    case weekly = "calendar"
+    case currently = "sun.max" //the current weather view
+    case today = "clock" //the daily detailed weather view
+    case weekly = "calendar" // the weekly weather forecast view
 }
-
+//swift ui view that serves as a navigation bar with tab selection functionality
 struct AppViewBar: View {
-    @Binding var selectedTab: Tab
-    @Environment (\.colorScheme) var colorScheme
+    @Binding var selectedTab: Tab // state binding to the current selected tab
+    @Environment (\.colorScheme) var colorScheme // Environment property to adapt stype based on the system's color scheme
     
     func getTabName(tab: Tab) -> String {
         switch tab {
         case .currently:
-            return "Currently"
+            return "Currently"//show the name for current weather tab
         case .today:
-            return "Today"
+            return "Today"//show the name fot the today tab
         case .weekly:
-            return "Weekly"
+            return "Weekly"//show the name for the weekly forcast tab
         }
     }
-    
+    //Below is a loop through all cases of the tab enum to create tab items dynamically
     var body: some View {
         VStack {
             HStack {

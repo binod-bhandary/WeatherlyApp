@@ -6,30 +6,36 @@
 //
 
 import SwiftUI
-
+// WeeklyView displays weekly weather information based on the provided CityInfo.
 struct WeeklyView: View {
-    var cityInfo: CityInfo?
+    var cityInfo: CityInfo? // Optional property to hold the city and weather information.
     
     var body: some View {
+        // Check if cityInfo is available to display the content.
         if (cityInfo != nil) {
             ScrollView {
                 VStack {
+                    // Incorporates the WeeklyChart view to display the temperature trends throughout the week.
                     WeeklyChart(cityInfo: cityInfo, weekly: cityInfo?.daily)
+                    // Adds additional scrollable content which might include further details or visualization.
                     ScrollViewContent()
                 }
             }
         } else {
+            // Displays an error message if the data is unavailable.
             Text("Unable to display the data. Please try again.")
         }
     }
-    
+    // ScrollViewContent creates a horizontal scrollable area with daily weather details.
     @ViewBuilder
     func ScrollViewContent() -> some View {
         ScrollView(.horizontal) {
             HStack(spacing: 0) {
                 if (cityInfo?.daily != nil) {
+                    // Loops through the days, limited to a week's data or available count.
                     ForEach(0 ..< min(7, cityInfo!.daily!.time.count), id: \.self) { i in
                         VStack(spacing: 12) {
+                            // Displays "Today" for the first element, otherwise shows the date.
                             if (i == 0) {
                                 Text("Today")
                                     .font(.system(size: 14, weight: .semibold))
@@ -37,14 +43,17 @@ struct WeeklyView: View {
 //                                Text("Tomorrow")
 //                                    .font(.system(size: 14, weight: .semibold))
                             } else {
+                                // Formats the date string from YYYY-MM-DD to DD/MM.
                                 Text("\(String(cityInfo!.daily!.time[i].split(separator: "-")[2]))/\(String(cityInfo!.daily!.time[i].split(separator: "-")[1]))")
                                     .font(.system(size: 14, weight: .semibold))
                                 
                             }
+                            // MiniSceneView displays a 3D representation based on the weather condition.
                             MiniSceneView(sceneName: getWeatherInfo(weather_code: cityInfo!.daily!.weather_code[i])?.dayModel ?? "")
                                 .frame(height: 40)
                             VStack(spacing: 4) {
                                 HStack(spacing: 4) {
+                                    // Displays min and max temperature for the day.
 //                                    Image(systemName: getTempLogo(temperature: cityInfo!.hourly!.temperature_2m[i]))
 //                                        .font(.system(size: 14))
 //                                        .opacity(0.8)

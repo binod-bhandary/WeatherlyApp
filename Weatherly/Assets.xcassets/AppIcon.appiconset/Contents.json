@@ -6,15 +6,10 @@
       "size" : "1024x1024"
     },
     {
-      "filename" : "icon.png",
+      "filename" : "icon 1.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"
-    },
-    {
-      "filename" : "appicon1.png",
-      "idiom" : "universal",
-      "scale" : "1x"
     }
   ],
   "info" : {

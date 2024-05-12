@@ -7,16 +7,18 @@
 
 import SwiftUI
 
-
+//Define a view to display current weather info for a given location
 struct CurrentView: View {
-    var cityInfo: CityInfo?
+    var cityInfo: CityInfo?//optional data containing weather and city details
     
     var body: some View {
+        //Attempt to retrieve the weather info using the current weather code
         let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: cityInfo?.current?.weather_code ?? -1)
-        
+        //check if current weather data exists
         if (cityInfo?.current != nil) {
             ScrollView {
                 VStack {
+                    //Display the appropriate 3D model based on whether day or night
                     if (weatherInfo != nil) {
                         if (cityInfo?.current?.is_day == 0 && weatherInfo?.nightModel != nil) {
                             BasicLoadingUIViewRepresentable(sceneName: weatherInfo!.nightModel)
@@ -26,6 +28,7 @@ struct CurrentView: View {
                                 .frame(height: 300)
                         }
                     }
+                    //Vertical stack to display temperature and weather description
                     VStack(spacing: 6) {
                         if (cityInfo?.current?.temperature_2m != nil) {
                             Text("\(String(format: "%.0f", cityInfo!.current!.temperature_2m))°")
@@ -48,6 +51,7 @@ struct CurrentView: View {
                     )
                     
                     
+
                     
                     //            Spacer()
                 }
