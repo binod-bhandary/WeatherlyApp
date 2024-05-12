@@ -37,6 +37,20 @@ func weeklyToChartsData(weekly: WeeklyData?) -> [ChartDayData] {
     return chartDataArray
 }
 
+var dateFormatter: DateFormatter {
+    let    formatter = DateFormatter()
+           formatter.dateFormat = "dd/MM"
+            formatter.locale = Locale(identifier: "en_US_POSIX")
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    return formatter
+}
+var dateDayFormatter: DateFormatter {
+    let    formatter = DateFormatter()
+           formatter.dateFormat = "EEEE MMMM dd"
+           formatter.locale = Locale(identifier: "en_US_POSIX")
+           formatter.timeZone = TimeZone(secondsFromGMT: 0)
+    return formatter
+}
 struct WeeklyChart: View {
     
     var cityInfo: CityInfo?
@@ -113,15 +127,11 @@ struct WeeklyChart: View {
                 AxisMarks(values: .stride(by: .day, count: 1)) { axisValue in
                     if let date = axisValue.as(Date.self) {
                         AxisValueLabel(centered: true, multiLabelAlignment: .center) {
-//                            let formatter = DateFormatter()
-//                            formatter.dateFormat = "dd/MM"
-//                            let formattedDate = formatter.string(from: date)
+                            
                             if (axisValue.index == 7) {
                                 Text("").font(.system(size: 8))
-                                
                             }
-//                            Text("\(formattedDate)").font(.system(size: 8))
-                            Text("Data Value").font(.system(size: 8))
+                            Text("\(date, formatter: dateFormatter)").font(.system(size: 8))
                         }
                     }
                     AxisTick(stroke: StrokeStyle(lineWidth: 0))
@@ -200,7 +210,7 @@ struct WeeklyChart: View {
         // Attempt JSON decoding
         let cityInfo = try JSONDecoder().decode(CityInfo.self, from: jsonData)
         return WeeklyView(cityInfo: cityInfo)
-            .background(LinearGradient(
+                .background(LinearGradient(
                 gradient: Gradient(colors: [.purple.opacity(0.2), .indigo.opacity(0.8)]), startPoint: .top, endPoint: .bottom))
     } catch {
         // Handle decoding error

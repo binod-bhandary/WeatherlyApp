@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 
+// **** not used ***
 class WeatherManager {
     func getCurrentWeather(latitude: CLLocationDegrees, longitude: CLLocationDegrees) async throws -> ResponseBody {
         // Hardcode for testing:

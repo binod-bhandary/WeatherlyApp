@@ -41,6 +41,8 @@ struct ContentView: View {
         }
         focusedSearch = false
     }
+
+    
     var body: some View {
         let weatherInfo: WeatherInfo? = getWeatherInfo(weather_code: LocationManager.shared.cityInfo?.current?.weather_code ?? -1)
         VStack(spacing: 0) {
@@ -223,20 +225,12 @@ struct ContentView: View {
             else {
                 // set city info values
                 if (locationManager.isFetchingCityInfo == false && locationManager.cityInfo != nil) {
-                     VStack {
-                        Text(weatherInfo?.dayDescription ?? "")
-                            .bold()
-                            .font(.title)
-                            .onAppear{
-                                cityName = locationManager.cityInfo?.city?.name ?? "-"
-                                cityCountry = (locationManager.cityInfo?.city?.admin1 ?? "Unknown") + ", " + (locationManager.cityInfo?.city?.country ?? "Unknown")
-                            }
-                        HStack {
-                            Text("Infomation")
-                        }
-                        Text("")
-                    }
-                }
+                    WeatherDateTimeView(curDateTime: locationManager.cityInfo?.current?.date ?? Date())
+                       .onAppear {
+                          cityName = locationManager.cityInfo?.city?.name ?? "-"
+                          cityCountry = (locationManager.cityInfo?.city?.admin1 ?? "Unknown") + ", " + (locationManager.cityInfo?.city?.country ?? "Unknown")
+                      }
+                 }
                 
                 
                 

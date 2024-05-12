@@ -8,13 +8,15 @@
 import Foundation
 import SwiftUI
 struct CurrentInfoDash: View {
-    var temp_high: Double?
-    var temp_low: Double?
-    var sun_rise: String?
-    var sun_set: String?
+   
     var wind_speed: Double?
     var humidity: Int8?
     var precipitation_probability: Int8?
+    
+//    var temp_high: Double?
+//    var temp_low: Double?
+//    var sun_rise: String?
+//    var sun_set: String?
     
     var body: some View {
         HStack(alignment: .center) {
@@ -89,77 +91,77 @@ struct CurrentInfoDash: View {
         .clipShape(RoundedRectangle(cornerRadius: 24))
         .padding()
         // added
-        HStack(alignment: .center) {
-            Spacer()
-            VStack(spacing: 8) {
-                HStack(spacing: 4) {
-                    Image(systemName: "sun.max.fill")
-                        .font(.system(size: 14))
-                        .opacity(0.8)
-                    Text("Temperature")
-                        .font(.system(size: 13, weight: .light))
-                        .opacity(0.8)
-                }
-                if (temp_high != nil) {
-                    Text("H\(String(format: "%.0f", (temp_high!)))°, L\(String(format: "%.0f", (temp_low!)))°")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                } else {
-                    Text("???")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                        .opacity(0.4)
-                }
-            }
-            .frame(maxWidth: .infinity)
-            
-            Divider()
-                .background(.white.opacity(0.8))
-                .padding(.vertical)
-            VStack(spacing: 8) {
-                
-                HStack(spacing: 4) {
-                    Image(systemName: "sunrise.fill")
-                        .font(.system(size: 14))
-                        .opacity(0.8)
-                    Text("Sunrise")
-                        .font(.system(size: 13, weight: .light))
-                        .opacity(0.8)
-                }
-                if (sun_rise != nil) {
-                    Text("\(sun_rise!)")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                } else {
-                    Text("???")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                }
-            }
-            .frame(maxWidth: .infinity)
-            Divider()
-                .background(.white.opacity(0.8))
-                .padding(.vertical)
-            VStack(spacing: 8) {
-                HStack(spacing: 4) {
-                    Image(systemName: "sunset.fill")
-                        .font(.system(size: 14))
-                        .opacity(0.8)
-                    Text("Sunset")
-                        .font(.system(size: 13, weight: .light))
-                        .opacity(0.8)
-                }
-                if (sun_set != nil) {
-                    Text("\(sun_set!)")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                } else {
-                    Text("???")
-                        .font(.system(size: 14, weight: .semibold, design: .rounded))
-                }
-            }
-            .frame(maxWidth: .infinity)
-            Spacer()
-        }
-        .frame(height: 90)
-        .background(.black.opacity(0.15))
-        .clipShape(RoundedRectangle(cornerRadius: 24))
-        .padding()
+//        HStack(alignment: .center) {
+//            Spacer()
+//            VStack(spacing: 8) {
+//                HStack(spacing: 4) {
+//                    Image(systemName: "sun.max.fill")
+//                        .font(.system(size: 14))
+//                        .opacity(0.8)
+//                    Text("Temperature")
+//                        .font(.system(size: 13, weight: .light))
+//                        .opacity(0.8)
+//                }
+//                if (temp_high != nil) {
+//                    Text("H\(String(format: "%.0f", (temp_high!)))°, L\(String(format: "%.0f", (temp_low!)))°")
+//                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+//                } else {
+//                    Text("???")
+//                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+//                        .opacity(0.4)
+//                }
+//            }
+//            .frame(maxWidth: .infinity)
+//            
+//            Divider()
+//                .background(.white.opacity(0.8))
+//                .padding(.vertical)
+//            VStack(spacing: 8) {
+//                
+//                HStack(spacing: 4) {
+//                    Image(systemName: "sunrise.fill")
+//                        .font(.system(size: 14))
+//                        .opacity(0.8)
+//                    Text("Sunrise")
+//                        .font(.system(size: 13, weight: .light))
+//                        .opacity(0.8)
+//                }
+//                if (sun_rise != nil) {
+//                    Text("\(sun_rise!)")
+//                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+//                } else {
+//                    Text("???")
+//                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+//                }
+//            }
+//            .frame(maxWidth: .infinity)
+//            Divider()
+//                .background(.white.opacity(0.8))
+//                .padding(.vertical)
+//            VStack(spacing: 8) {
+//                HStack(spacing: 4) {
+//                    Image(systemName: "sunset.fill")
+//                        .font(.system(size: 14))
+//                        .opacity(0.8)
+//                    Text("Sunset")
+//                        .font(.system(size: 13, weight: .light))
+//                        .opacity(0.8)
+//                }
+//                if (sun_set != nil) {
+//                    Text("\(sun_set!)")
+//                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+//                } else {
+//                    Text("???")
+//                        .font(.system(size: 14, weight: .semibold, design: .rounded))
+//                }
+//            }
+//            .frame(maxWidth: .infinity)
+//            Spacer()
+//        }
+//        .frame(height: 90)
+//        .background(.black.opacity(0.15))
+//        .clipShape(RoundedRectangle(cornerRadius: 24))
+//        .padding()
     }
 }
 

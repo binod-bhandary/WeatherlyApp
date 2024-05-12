@@ -45,6 +45,9 @@ struct CurrentData: Codable {
     var relative_humidity_2m: Int8?
     var precipitation_probability: Int8?
     var wind_speed_10m: Double
+    var date: Date? { // Computed property to convert to Date
+        time.isEmpty == false ? dateFormatter.date(from: time) : nil
+    }
 }
 
 struct HourlyData: Codable {
