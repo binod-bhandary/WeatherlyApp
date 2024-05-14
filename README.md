@@ -35,7 +35,7 @@ This README file provides an overview of the 3D Weatherly app, which offers curr
 
 This app uses a weather API to fetch real-time weather data. Follow these steps to set up the API:
 
-1. Sign up for an API key from a weather service provider (e.g., OpenWeatherMap, WeatherAPI).
+1. Sign up for an  free API key from a weather service provider (e.g., OpenWeatherMap, WeatherAPI, meteo).
 2. In the project, navigate to the `FetchApi.swift` file.
 
 ## Usage
