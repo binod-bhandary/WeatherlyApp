@@ -6,6 +6,7 @@ This README file provides an overview of the 3D Weatherly app, which offers curr
 ### AUTHOR
 
 BINOD BHANDARY 25207046​
+
 HONGYI LIANG 13345905​
 
 ### Features
